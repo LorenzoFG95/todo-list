@@ -1,0 +1,10 @@
+.completed {
+  color: lightgreen;
+}
+
+.Task {
+  display: flex;
+  width: 300px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
