@@ -3,8 +3,24 @@
 }
 
 .Task {
+  border: 1px solid rgb(70, 76, 158);
   display: flex;
   width: 300px;
   justify-content: space-between;
   flex-wrap: wrap;
+  user-select: none;
+  padding: 5px;
+  &:hover {
+    background-color: rgb(20, 28, 150);
+  }
+}
+
+.delete {
+  border: 1px solid rgb(70, 76, 158);
+  &:hover {
+    border: 1px solid black;
+  }
+  &:active {
+    box-shadow: inset 0 0 8px 1px #000000;
+  }
 }

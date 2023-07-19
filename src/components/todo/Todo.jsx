@@ -28,6 +28,11 @@ const Todo = () => {
       setInput("");
     }
   };
+  const onHandleLogout = (e) => {
+    dispatch({
+      type: "LOGOUT",
+    });
+  };
   const onHandleInput = (e) => setInput(e.target.value);
 
   return (
@@ -44,6 +49,7 @@ const Todo = () => {
       {state.todos.map((task, i) => (
         <Task data={task} key={i} />
       ))}
+      <button onClick={onHandleLogout}>Logout</button>
     </div>
   );
 };

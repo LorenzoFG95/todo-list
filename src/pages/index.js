@@ -4,6 +4,7 @@ import { mainReducer } from "@/state/reducers";
 import Head from "next/head";
 import Todo from "@/components/todo";
 import Task from "@/components/task";
+import Login from "@/components/login";
 import styles from "@/styles/Home.module.scss";
 
 export default function Home() {
@@ -18,8 +19,8 @@ export default function Home() {
       </Head>
       <MainContext.Provider value={{ state, dispatch }}>
         <main>
-          <h1>Todo list with global state</h1>
-          <Todo />
+          <h1>Todo list - {state.user}</h1>
+          {state.user ? <Todo /> : <Login />}
         </main>
       </MainContext.Provider>
     </>
