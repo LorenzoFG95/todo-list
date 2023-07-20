@@ -1,11 +1,18 @@
 import { useContext } from "react";
 import { MainContext } from "@/state";
 import styles from "./index.module.scss";
+import { deleteDoc } from "firebase/firestore";
 
 const Task = ({ data }) => {
   const { state, dispatch } = useContext(MainContext);
-  const handleDelete = (id) => {
-    dispatch({ type: "DELETE_TODO", payload: id });
+
+  const handleDelete = async (e) => {
+    // if (e.pageX >= 0) {
+    dispatch({ type: "DELETE_TODO", payload: data.id });
+    // try {
+    // await deleteDoc(doc(db, "todos", data.id));
+    // } catch (e) {}
+    // }
   };
   const handleComplete = (id) => {
     dispatch({ type: "TOGGLE_TODO", payload: id });

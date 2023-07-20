@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { MainContext, initialstate } from "@/state";
 import { mainReducer } from "@/state/reducers";
 import Head from "next/head";
@@ -6,9 +6,22 @@ import Todo from "@/components/todo";
 import Task from "@/components/task";
 import Login from "@/components/login";
 import styles from "@/styles/Home.module.scss";
+import { googleAuth, db } from "@/plugins/firebase";
+import { collection, getDocs } from "firebase/firestore";
 
-export default function Home() {
+export default function Home({ data }) {
   const [state, dispatch] = useReducer(mainReducer, initialstate);
+
+  const onLoginWithGoogle = () => {
+    googleAuth().then((data) =>
+      dispatch({ type: "ADD_USER", payload: data.user.displayName })
+    );
+  };
+
+  useEffect(() => {
+    dispatch({ type: "SET_DATABASE", payload: data });
+  }, []);
+
   return (
     <>
       <Head>
@@ -20,9 +33,33 @@ export default function Home() {
       <MainContext.Provider value={{ state, dispatch }}>
         <main>
           <h1>Todo list - {state.user}</h1>
-          {state.user ? <Todo /> : <Login />}
+          {state.user ? (
+            <Todo />
+          ) : (
+            <>
+              <Login />
+              <button className={styles.google} onClick={onLoginWithGoogle}>
+                Entra con Google
+              </button>
+            </>
+          )}
         </main>
       </MainContext.Provider>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const data = [];
+  const querySnapshot = await getDocs(collection(db, "todos"));
+
+  querySnapshot.forEach((doc) => {
+    data.push({ ...doc.data(), id: doc.id });
+  });
+
+  return {
+    props: {
+      data,
+    },
+  };
 }

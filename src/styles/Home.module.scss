@@ -227,3 +227,33 @@
     transform: rotate(0deg);
   }
 }
+
+.google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background-color: transparent;
+  border: 0;
+  border-radius: 12px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.35);
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.35s;
+
+  &:hover {
+    background-color: rgb(23, 113, 231);
+    color: white;
+  }
+  &::after {
+    content: "";
+    background-size: 20px 20px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-size: 10px;
+    background-position: center center;
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/706px-Google_%22G%22_Logo.svg.png");
+  }
+}

@@ -1,5 +1,10 @@
 export const mainReducer = (state, action) => {
   switch (action.type) {
+    case "SET_DATABASE":
+      return {
+        ...state,
+        todos: action.payload,
+      };
     case "TOGGLE_TODO":
       return {
         ...state,
